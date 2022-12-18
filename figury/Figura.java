@@ -20,7 +20,7 @@ import java.util.Random;
 public abstract class Figura implements Runnable, ActionListener/*, Shape*/ {
 
     // wspolny bufor
-    protected Graphics2D buffer;
+    protected static Graphics2D buffer;
     protected Area area;
     // do wykreslania
     protected Shape shape;
@@ -33,9 +33,9 @@ public abstract class Figura implements Runnable, ActionListener/*, Shape*/ {
     private double sf;
     // kat obrotu
     private final double an;
-    private final int delay;
-    private final int width;
-    private final int height;
+    private static int delay;
+    private static int width;
+    private static int height;
     private final Color clr;
 
     protected static final Random rand = new Random();
@@ -87,7 +87,7 @@ public abstract class Figura implements Runnable, ActionListener/*, Shape*/ {
         if (cy < 0 || cy > height)
             dy = -dy;
         // zwiekszenie lub zmniejszenie
-        if (bounds.height > height / 3 || bounds.height < 10)
+        if (sf > 1 && bounds.height > height / 2 || sf < 1 && bounds.height < 20)
             sf = 1 / sf;
         // konstrukcja przeksztalcenia
         aft.translate(cx, cy);
@@ -108,6 +108,16 @@ public abstract class Figura implements Runnable, ActionListener/*, Shape*/ {
         // wykreslenie ramki
         buffer.setColor(clr.darker());
         buffer.draw(shape);
+    }
+
+    public static void updateCanvas(Graphics2D buf, int w, int h){
+        buffer = buf;
+        width = w;
+        height = h;
+    }
+
+    public static void updateDelay(int del){
+        delay = del;
     }
 
 }

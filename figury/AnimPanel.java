@@ -44,6 +44,7 @@ public class AnimPanel extends JPanel implements ActionListener {
         image = createImage(width, height);
         buffer = (Graphics2D) image.getGraphics();
         buffer.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        buffer.setBackground(Color.WHITE);
         device = (Graphics2D) getGraphics();
         device.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     }
@@ -63,9 +64,23 @@ public class AnimPanel extends JPanel implements ActionListener {
         }
     }
 
+    void changeSpeed(int delay){
+        timer.setDelay(delay);
+        Figura.updateDelay(timer.getDelay());
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        device.drawImage(image, 0, 0, null);
+        Image image = createImage(getWidth(), getHeight());
+        image.getGraphics().drawImage(this.image,0,0,null);
+        buffer = (Graphics2D) image.getGraphics();
+        buffer.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        this.image = image;
+        buffer.setBackground(Color.WHITE);
+        Figura.updateCanvas(buffer, getWidth(), getHeight());
+        device = (Graphics2D) getGraphics();
+        device.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        device.drawImage(this.image, 0, 0, null);
         buffer.clearRect(0, 0, getWidth(), getHeight());
     }
 }
