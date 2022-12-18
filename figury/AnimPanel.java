@@ -7,6 +7,7 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serial;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -25,7 +26,7 @@ public class AnimPanel extends JPanel implements ActionListener {
     // wykreslacz bufora
     Graphics2D buffer;
 
-    private final int delay = 70;
+    private int delay = 70;
 
     private final Timer timer;
 
@@ -59,13 +60,16 @@ public class AnimPanel extends JPanel implements ActionListener {
     void animate() {
         if (timer.isRunning()) {
             timer.stop();
+            Figura.isMoving = false;
         } else {
             timer.start();
+            Figura.isMoving = true;
         }
     }
 
     void changeSpeed(int delay){
         timer.setDelay(delay);
+        this.delay = delay;
         Figura.updateDelay(timer.getDelay());
     }
 

@@ -44,18 +44,18 @@ public class AnimatorApp extends JFrame {
         contentPane.setLayout(null);
 
         kanwa = new AnimPanel();
-        kanwa.setBounds(10, 11, 422, 219);
+        kanwa.setBounds(10, 11, 412, 209);
         contentPane.add(kanwa);
         SwingUtilities.invokeLater(kanwa::initialize);
 
         JButton btnAdd = new JButton("Add");
         btnAdd.addActionListener(e -> kanwa.addFig());
-        btnAdd.setBounds(10, 239, 90, 23);
+        btnAdd.setBounds(10, 229, 90, 23);
         contentPane.add(btnAdd);
 
         JButton btnAnimate = new JButton("Animate");
         btnAnimate.addActionListener(e -> kanwa.animate());
-        btnAnimate.setBounds(110, 239, 90, 23);
+        btnAnimate.setBounds(110, 229, 90, 23);
         contentPane.add(btnAnimate);
 
         JToggleButton btnSpeedx5 = new JToggleButton("Speed x5");
@@ -67,7 +67,7 @@ public class AnimatorApp extends JFrame {
                 kanwa.changeSpeed(70);
             }
         });
-        btnSpeedx5.setBounds(210, 239,90,23);
+        btnSpeedx5.setBounds(210, 229,90,23);
         contentPane.add(btnSpeedx5);
 
         contentPane.addMouseListener(new MouseAdapter() {
@@ -84,10 +84,10 @@ public class AnimatorApp extends JFrame {
     }
 
     private void updateSize(JButton btnAdd, JButton btnAnim, JToggleButton btnSpeedx5){
-        kanwa.setSize(getWidth()-28,getHeight()-81);
-        btnAdd.setLocation(10,getHeight()-61);
-        btnAnim.setLocation(110,getHeight()-61);
-        btnSpeedx5.setLocation(210, getHeight()-61);
+        kanwa.setSize(getWidth()-38,getHeight()-91);
+        btnAdd.setLocation(10,getHeight()-71);
+        btnAnim.setLocation(110,getHeight()-71);
+        btnSpeedx5.setLocation(210, getHeight()-71);
     }
 
 }

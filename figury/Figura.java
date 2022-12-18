@@ -37,6 +37,7 @@ public abstract class Figura implements Runnable, ActionListener/*, Shape*/ {
     private static int width;
     private static int height;
     private final Color clr;
+    public static boolean isMoving = false;
 
     protected static final Random rand = new Random();
 
@@ -65,7 +66,8 @@ public abstract class Figura implements Runnable, ActionListener/*, Shape*/ {
 
         while (true) {
             // przygotowanie nastepnego kadru
-            shape = nextFrame();
+            if(isMoving)
+                shape = nextFrame();
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
@@ -82,9 +84,9 @@ public abstract class Figura implements Runnable, ActionListener/*, Shape*/ {
         int cx = bounds.x + bounds.width / 2;
         int cy = bounds.y + bounds.height / 2;
         // odbicie
-        if (cx < 0 || cx > width)
+        if (dx < 0 && cx < 0 || dx > 0 && cx > width)
             dx = -dx;
-        if (cy < 0 || cy > height)
+        if (dy < 0 && cy < 0 || dy > 0 && cy > height)
             dy = -dy;
         // zwiekszenie lub zmniejszenie
         if (sf > 1 && bounds.height > height / 2 || sf < 1 && bounds.height < 20)
